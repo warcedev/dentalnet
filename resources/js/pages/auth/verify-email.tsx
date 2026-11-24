@@ -1,0 +1,41 @@
+// Components
+import TextLink from '@/components/text-link';
+import { Button } from '@/components/ui/button';
+import { Spinner } from '@/components/ui/spinner';
+import { logout } from '@/routes';
+import { send } from '@/routes/verification';
+import { Form, Head } from '@inertiajs/react';
+
+export default function VerifyEmail({ status }: { status?: string }) {
+    return (
+        <>
+            <Head title="Verificación de correo" />
+
+            {status === 'verification-link-sent' && (
+                <div className="mb-4 text-center text-sm font-medium text-green-600">
+                    Le enviamos un nuevo enlace de verificación a su correo.
+                </div>
+            )}
+
+            <Form {...send.form()} className="space-y-6 text-center">
+                {({ processing }) => (
+                    <>
+                        <Button disabled={processing} variant="secondary">
+                            {processing && <Spinner />}
+                            Reenviar correo de verificación
+                        </Button>
+
+                        <TextLink href={logout()} className="mx-auto block text-sm">
+                            Cerrar sesión
+                        </TextLink>
+                    </>
+                )}
+            </Form>
+        </>
+    );
+}
+
+VerifyEmail.layout = {
+    title: 'Verificación de correo',
+    description: 'Verifique su correo haciendo clic en el enlace que le enviamos.',
+};

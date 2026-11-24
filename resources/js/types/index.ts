@@ -1,0 +1,9 @@
+export type * from './admin';
+export type * from './agenda';
+export type * from './auth';
+export type * from './billing';
+export type * from './navigation';
+export type * from './odontogram';
+export type * from './pagination';
+export type * from './patients';
+export type * from './ui';
